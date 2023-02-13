@@ -15,7 +15,7 @@ string MySql = "Server=[Your Server};Port={Your Port};Database={Iput a name of a
 // *** Initialize BlackHole *** Basic Easy COnfiguration. For more Advanced Configurations Read the Documentation
 //Make sure to choose the correct Sql Type
 //If LogsPath is unset or Empty string, the default logs path is in Current User's Folder/BlackHole/Logs
-builder.Services.SuperNova(new BlackHoleBaseConfig {ConnectionString=MySql1,SqlType = BHSqlTypes.MySql, LogsPath = string.Empty });
+builder.Services.SuperNova(new BlackHoleBaseConfig {ConnectionString=MySql,SqlType = BHSqlTypes.MySql, LogsPath = string.Empty });
 
 //Put in Comment the Above Line and Uncomment the next to SetUp an SqLite Database in Current User's Folder/BlackHole
 //builder.Services.SuperNovaLite("testDatabase");
