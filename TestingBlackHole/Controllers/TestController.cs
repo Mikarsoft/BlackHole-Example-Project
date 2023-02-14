@@ -14,5 +14,13 @@ namespace TestingBlackHole.Controllers
             _testService = testService;
             _testDataGenerator = testDataGenerator;
         }
+
+        [HttpPost]
+        [Route("insert-guid-authcookies")]
+        public IList<Guid> InsertGuidCookies(int number)
+        {
+            var cookies = _testDataGenerator.GenerateCookieG(number);
+            return _testService.InsertAuthCookies(cookies);
+        }
     }
 }
