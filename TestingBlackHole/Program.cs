@@ -10,7 +10,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Connection String. Change it to lead at your Host
-string MySql = "Server=[Your Server};Port={Your Port};Database={Iput a name of a non-existing Database}; Uid={Your Sql User}; Pwd={Your Sql Password}";
+string MySql = "Server=[Your Server};Port={Your Port};Database={Input a name of a non-existing Database}; Uid={Your Sql User}; Pwd={Your Sql Password}";
 
 // *** Initialize BlackHole *** Basic Easy COnfiguration. For more Advanced Configurations Read the Documentation
 //Make sure to choose the correct Sql Type

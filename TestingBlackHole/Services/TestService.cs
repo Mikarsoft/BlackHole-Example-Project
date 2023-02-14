@@ -51,7 +51,7 @@ namespace TestingBlackHole.Services
             _bonusServiceG=bonusServiceG;_bonusServiceI=bonusServiceI;_bonusServiceS=bonusServiceS;
         }
 
-        // Integers Test
+        // Integer Id Test
         public IList<int> InsertAuthCookies(List<AuthCookieI> cookies)
         {
             return _authCookieServiceI.InsertEntries(cookies);
@@ -146,7 +146,7 @@ namespace TestingBlackHole.Services
         }
 
 
-        //Guid Tests
+        //Guid Id Tests
         public IList<Guid> InsertAuthCookies(List<AuthCookieG> cookies)
         {
             return _authCookieServiceG.InsertEntries(cookies);
@@ -235,7 +235,7 @@ namespace TestingBlackHole.Services
                 .ExecuteQueryAsync();
         }
 
-        //
+        //String Id Tests
         public IList<string?> InsertAuthCookies(List<AuthCookieS> cookies)
         {
             return _authCookieServiceS.InsertEntries(cookies);
@@ -308,7 +308,7 @@ namespace TestingBlackHole.Services
             return await _orderServiceS.GetEntriesAsyncWhere(x => x.CustomerId == Id);
         }
 
-        public async Task<List<string>> GetCustomerIdsS()
+        public async Task<List<string?>> GetCustomerIdsS()
         {
             return await _customerServiceS.GetIdsWhereAsync(x => x.Id != string.Empty);
         }
