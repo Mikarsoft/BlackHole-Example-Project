@@ -1,4 +1,4 @@
-﻿using BlackHole.Entities;
+﻿using BlackHole.Services;
 using TestingBlackHole.Entities.GuidEntities;
 using TestingBlackHole.Entities.IntegerEntities;
 using TestingBlackHole.Entities.StringEntities;
@@ -8,8 +8,6 @@ namespace TestingBlackHole.Services
 {
     public class TestDataGenerator : BlackHoleScoped , ITestDataGenerator
     {
-        
-
         public List<CustomerG> GenerateCustomersG(int number, List<Guid> userTypes)
         {
             int index = 0;

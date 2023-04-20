@@ -1,10 +1,10 @@
-﻿using BlackHole.Entities;
-using BlackHole.Interfaces;
-using TestingBlackHole.DTOs;
+﻿using TestingBlackHole.DTOs;
 using TestingBlackHole.Entities.GuidEntities;
 using TestingBlackHole.Entities.IntegerEntities;
 using TestingBlackHole.Entities.StringEntities;
 using TestingBlackHole.Interfaces;
+using BlackHole.Core;
+using BlackHole.Services;
 
 namespace TestingBlackHole.Services
 {
@@ -69,7 +69,7 @@ namespace TestingBlackHole.Services
 
         public async Task<bool> DeleteCustomersFromIdToId(int from, int to)
         {
-           return await _customerServiceI.DeleteEntriesWhere(x => x.Id < to && x.Id > from);
+           return await _customerServiceI.DeleteEntriesAsyncWhere(x => x.Id < to && x.Id > from);
         }
 
         public async Task<IList<CustomerI>> GetAllCustomersAsync()
@@ -99,7 +99,7 @@ namespace TestingBlackHole.Services
 
         public async Task<bool> DeleteUserTypeById(int Id)
         {
-            return await _userTypeServiceI.DeleteEntryById(Id);
+            return await _userTypeServiceI.DeleteEntryByIdAsync(Id);
         }
 
         public async Task<IList<int>> InsertBonusLines(List<BonusPointsI> bonus)
@@ -131,7 +131,7 @@ namespace TestingBlackHole.Services
 
         public async Task<List<int>> GetCustomerIds()
         {
-            return await _customerServiceI.GetIdsWhereAsync(x => x.Id != 0);
+            return await _customerServiceI.GetIdsAsyncWhere(x => x.Id != 0);
         }
 
         public async Task<IList<OrderDtoI>> JoinProductsToCustomers()
@@ -189,7 +189,7 @@ namespace TestingBlackHole.Services
 
         public async Task<bool> DeleteUserTypeById(Guid Id)
         {
-            return await _userTypeServiceG.DeleteEntryById(Id);
+            return await _userTypeServiceG.DeleteEntryByIdAsync(Id);
         }
 
         public async Task<IList<Guid>> InsertBonusLines(List<BonusPointsG> bonus)
@@ -221,7 +221,7 @@ namespace TestingBlackHole.Services
 
         public async Task<List<Guid>> GetCustomerIdsG()
         {
-            return await _customerServiceG.GetIdsWhereAsync(x => x.Id != Guid.Empty);
+            return await _customerServiceG.GetIdsAsyncWhere(x => x.Id != Guid.Empty);
         }
 
         public async Task<IList<OrderDtoG>> JoinProductsToCustomersG()
@@ -278,7 +278,7 @@ namespace TestingBlackHole.Services
 
         public async Task<bool> DeleteUserTypeById(string Id)
         {
-            return await _userTypeServiceS.DeleteEntryById(Id);
+            return await _userTypeServiceS.DeleteEntryByIdAsync(Id);
         }
 
         public async Task<IList<string?>> InsertBonusLines(List<BonusPointsS> bonus)
@@ -288,14 +288,18 @@ namespace TestingBlackHole.Services
 
         public async Task<IList<string?>> InsertOrder(OrderS order, List<OrderLineS> orderLines)
         {
-            string? OrderId = await _orderServiceS.InsertEntryAsync(order);
+            var OrderId = await _orderServiceS.InsertEntryAsync(order);
 
-            foreach (OrderLineS line in orderLines)
+            if(OrderId != null)
             {
-                line.OrderId = OrderId;
-            }
+                foreach (OrderLineS line in orderLines)
+                {
+                    line.OrderId = OrderId;
+                }
 
-            return await _orderLineServiceS.InsertEntriesAsync(orderLines);
+                return await _orderLineServiceS.InsertEntriesAsync(orderLines);
+            }
+            return new List<string?>();
         }
 
         public IList<CustomerS> GetCustomersOfUserType(string userTypeId)
@@ -308,9 +312,9 @@ namespace TestingBlackHole.Services
             return await _orderServiceS.GetEntriesAsyncWhere(x => x.CustomerId == Id);
         }
 
-        public async Task<List<string?>> GetCustomerIdsS()
+        public async Task<List<string>> GetCustomerIdsS()
         {
-            return await _customerServiceS.GetIdsWhereAsync(x => x.Id != string.Empty);
+            return await _customerServiceS.GetIdsAsyncWhere(x => x.Id != string.Empty);
         }
 
         public async Task<IList<OrderDtoS>> JoinProductsToCustomersS()

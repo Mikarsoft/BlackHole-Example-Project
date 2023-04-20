@@ -1,6 +1,4 @@
-﻿using BlackHole.Attributes.ColumnAttributes;
-using BlackHole.Attributes.EntityAttributes;
-using BlackHole.Entities;
+﻿using BlackHole.Entities;
 
 namespace TestingBlackHole.Entities.GuidEntities
 {

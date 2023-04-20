@@ -1,5 +1,4 @@
-﻿using BlackHole.Attributes.ColumnAttributes;
-using BlackHole.Entities;
+﻿using BlackHole.Entities;
 
 namespace TestingBlackHole.Entities.StringEntities
 {

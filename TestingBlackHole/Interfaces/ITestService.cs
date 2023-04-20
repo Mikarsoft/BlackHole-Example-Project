@@ -99,7 +99,7 @@ namespace TestingBlackHole.Interfaces
 
         Task<bool> DeleteUserTypeById(string Id);
 
-        Task<List<string?>> GetCustomerIdsS();
+        Task<List<string>> GetCustomerIdsS();
 
         Task<List<string?>> InsertManyBonus(List<BonusPointsS> bonus);
 
