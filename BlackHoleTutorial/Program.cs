@@ -9,12 +9,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-string Postgres = "Host={YourHost};Port={YourPort};Database={DatabaseName};User Id={YourUserName};Password={YourPassword}";
+string SqlServerConnectionString = "Data Source=127.0.0.1,1455;Database=BlackHoleTestingDb;User Id=sa;Password=glo7646.-;TrustServerCertificate=True";
 
-string devmode = "dev";
+//string devmode = "dev";
 
 //BlackHole Basic Configuration
-builder.Services.SuperNova(settings => settings.IsDeveloperMode(devmode=="dev").AddDatabase(connection => connection.UseNpgSql(Postgres, "eshop")));
+builder.Services.SuperNova(settings => settings.AutomaticUpdate().IsDeveloperMode(false).AddDatabase(connection => connection.UseSqlServer(SqlServerConnectionString)));
 
 var app = builder.Build();
 

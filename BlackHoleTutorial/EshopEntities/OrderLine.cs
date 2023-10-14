@@ -12,5 +12,12 @@ namespace BlackHoleTutorial.EshopEntities
         public string ProductName { get; set; } = string.Empty;
         public int Quantity { get; set; }
         public decimal Price { get; set; }
+
+        [ForeignKey(typeof(Product), "ProductId")]
+        public int ProductId { get; set; }
+
+        [ForeignKey(typeof(Product), "ProductCode")]
+        [VarCharSize]
+        public string ProductCode { get; set; } = string.Empty;
     }
 }

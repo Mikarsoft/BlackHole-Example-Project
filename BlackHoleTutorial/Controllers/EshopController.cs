@@ -88,9 +88,11 @@ namespace BlackHoleTutorial.Controllers
         public ActionResult<List<OrderLinesOfCustomerDto>> GetOrderLinesOfCustomer(Guid customerId)
         {
             return _orderLineService.InnerJoin<Orders, string, OrderLinesOfCustomerDto>(x => x.OrderId, x => x.Id)
-                .CastColumnOfFirstAs(x=>x.Price,x=>x.Priceeeees).Then()
+                .CastColumnOfFirstAs(x => x.Price, x => x.Priceeeees).Then()
+                .InnerJoinOn<OrderLine, Product, int, OrderLinesOfCustomerDto>(x => x.ProductId, x => x.ProductId).And(x => x.ProductCode, x => x.ProductCode)
+                .Then()
                 .InnerJoinOn<Orders, Customer, Guid, OrderLinesOfCustomerDto>(x => x.CustomerId, x => x.Id).WhereSecond(x => x.Id == customerId)
-                .Then().InnerJoinOn<Customer, Discount, string, OrderLinesOfCustomerDto>(x => x.FirstName, x => x.FirstName).And(x => x.LastName, x => x.LastName)
+                //.Then().InnerJoinOn<Customer, Discount, string, OrderLinesOfCustomerDto>(x => x.FirstName, x => x.FirstName).And(x => x.LastName, x => x.LastName)
                 .Then().ExecuteQuery();
         }
 

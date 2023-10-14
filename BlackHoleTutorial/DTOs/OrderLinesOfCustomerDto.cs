@@ -14,6 +14,7 @@ namespace BlackHoleTutorial.DTOs
         public string Priceeeees { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
         public int DiscountPercentage { get; set; }
-
+        public int ProductId { get; set; }
+        public string ProductCode { get; set; } = string.Empty;
     }
 }

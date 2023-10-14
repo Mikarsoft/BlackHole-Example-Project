@@ -12,14 +12,16 @@ namespace BlackHoleTutorial.EshopServices
         private readonly IBHDataProvider<Customer, Guid> _customerService;
         private readonly IBHDataProvider<Orders, string> _orderService;
         private readonly IBHDataProvider<OrderLine, int> _orderLineService;
+        private readonly IBHOpenDataProvider<Product> _productService;
 
         //Constructor of this Service
         public EshopService(IBHDataProvider<Customer,Guid> customerService, IBHDataProvider<Orders, string> orderService,
-            IBHDataProvider<OrderLine, int> orderLineService)
+            IBHDataProvider<OrderLine, int> orderLineService, IBHOpenDataProvider<Product> productService)
         {
             _customerService = customerService;
             _orderService = orderService;
             _orderLineService = orderLineService;
+            _productService = productService;
         }
 
         public Customer? GetCustomerById(Guid customerId)
@@ -108,16 +110,32 @@ namespace BlackHoleTutorial.EshopServices
 
             for(int i=0; i < totalProducts; i++)
             {
+                Product Aproduct = ProductGenerator(i);
+
+                _productService.InsertEntry(Aproduct);
+
                 orderLines.Add(new OrderLine
                 {
                     ProductName ="Skyrim",
                     Price = 2.5m,
                     Quantity = 2,
-                    OrderId= orderId
+                    OrderId= orderId,
+                    ProductId = Aproduct.ProductId,
+                    ProductCode = Aproduct.ProductCode
                 });
             }
 
             return orderLines;
+        }
+
+        private Product ProductGenerator(int productNumber)
+        {
+            return new Product
+            {
+                ProductCategory = productNumber.ToString(),
+                ProductName = $"EnglishName{productNumber}",
+                ProductNameFR = $"FrenchName{productNumber}"
+            };
         }
 
         //Generate an OrderLine with a non existing Foreing Key of the Order

@@ -12,7 +12,6 @@ namespace BlackHoleTutorial.EshopEntities
 
         [VarCharSize(50)]
         public string LastName { get; set; } = string.Empty;
-
         public int DiscountPercentage { get; set; }
     }
 }

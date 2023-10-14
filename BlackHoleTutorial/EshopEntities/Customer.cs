@@ -24,5 +24,8 @@ namespace BlackHoleTutorial.EshopEntities
         public string Email { get; set; } = string.Empty;
 
         public string Nationality { get; set; } = string.Empty;
+
+        [NotNullable]
+        public string MiddleName { get; set; } = string.Empty;
     }
 }
