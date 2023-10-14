@@ -87,6 +87,7 @@ namespace BlackHoleTutorial.Controllers
         [Route("customersOrderLine")]
         public ActionResult<List<OrderLinesOfCustomerDto>> GetOrderLinesOfCustomer(Guid customerId)
         {
+            //Join also Open Entities with Regular Entities.
             return _orderLineService.InnerJoin<Orders, string, OrderLinesOfCustomerDto>(x => x.OrderId, x => x.Id)
                 .CastColumnOfFirstAs(x => x.Price, x => x.Priceeeees).Then()
                 .InnerJoinOn<OrderLine, Product, int, OrderLinesOfCustomerDto>(x => x.ProductId, x => x.ProductId).And(x => x.ProductCode, x => x.ProductCode)

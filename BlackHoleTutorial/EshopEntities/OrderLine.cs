@@ -13,6 +13,7 @@ namespace BlackHoleTutorial.EshopEntities
         public int Quantity { get; set; }
         public decimal Price { get; set; }
 
+        //Composite Foreigh Keys that point to Composite Primary Key
         [ForeignKey(typeof(Product), "ProductId")]
         public int ProductId { get; set; }
 

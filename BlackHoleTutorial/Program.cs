@@ -9,7 +9,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-string SqlServerConnectionString = "Data Source=127.0.0.1,1455;Database=BlackHoleTestingDb;User Id=sa;Password=glo7646.-;TrustServerCertificate=True";
+//CAdd your Connection string here
+string SqlServerConnectionString = "Data Source=[Host],[Port];Database=[Database Name];User Id=[User Name];Password=[Password];TrustServerCertificate=[Optional]";
 
 //string devmode = "dev";
 
